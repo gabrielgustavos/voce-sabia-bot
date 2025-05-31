@@ -16,6 +16,8 @@ const twitterClient = new TwitterApi({
 });
 
 async function runBot() {
+  console.log("🚀 Iniciando bot em", new Date().toISOString());
+
   try {
 const temasNetflix = [
   "Stranger Things: Temporada Final",
@@ -96,6 +98,8 @@ Regras:
         }
 
         console.log("✅ Thread finalizada.");
+        console.log("✅ Bot finalizado com sucesso.");
+
       }
     }
   } catch (error) {
