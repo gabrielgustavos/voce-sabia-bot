@@ -27,15 +27,20 @@ async function runBot() {
       "curiosidades sobre animais bizarros",
       "fatos sobre filmes ou séries",
       "tecnologia surpreendente",
+      "fatos chocantes da natureza",
+      "invenções que mudaram o mundo"
     ];
 
-    const temaEscolhido = temas[Math.floor(Math.random() * temas.length)];
+    const tema = temas[Math.floor(Math.random() * temas.length)];
+
     const prompt = `
-Me dê 3 curiosidades sobre o tema "${temaEscolhido}", estilo “Você sabia que...?”, com até 280 caracteres cada.
+Você é um gerador de conteúdo viral do Twitter.
 
-Depois disso, me dê 1 thread com 4 partes sobre o mesmo tema.
+Crie 3 curiosidades bizarras e surpreendentes sobre "${tema}", no estilo “Você sabia que...?”, com até 280 caracteres. Use linguagem chamativa e emojis. Cada curiosidade deve incluir 1 hashtag no final e, se possível, um link relevante fictício (ex: mais info em curiosidades.com/tema).
 
-Responda apenas com JSON no formato:
+Depois, crie 1 thread com 4 partes sobre o mesmo tema, com tom narrativo e informativo, também com emojis e hashtags.
+
+Responda somente com JSON no formato:
 [
   { "text": "..." },
   { "text": "..." },
@@ -43,7 +48,7 @@ Responda apenas com JSON no formato:
   { "thread": ["Parte 1", "Parte 2", "Parte 3", "Parte 4"] }
 ]
 
-Use emojis e linguagem atrativa.
+O conteúdo deve ser escrito de forma cativante, capaz de gerar muitos compartilhamentos.
 `;
 
     const res = await openai.chat.completions.create({
