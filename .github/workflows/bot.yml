@@ -3,7 +3,7 @@ name: Run Bot
 on:
   workflow_dispatch: # para rodar manualmente
   schedule:
-    - cron: "*/10 * * * *"
+    - cron: "*/3 * * * *" # Executa a cada 3 minutos
 
 jobs:
   build:
