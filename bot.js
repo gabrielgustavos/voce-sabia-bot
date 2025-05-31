@@ -1,4 +1,3 @@
-const fs = require("fs");
 const dotenv = require("dotenv");
 const { TwitterApi } = require("twitter-api-v2");
 const OpenAI = require("openai");
@@ -18,29 +17,26 @@ const twitterClient = new TwitterApi({
 
 async function runBot() {
   try {
-    const temas = [
-      "curiosidades científicas",
-      "fatos históricos estranhos",
-      "mistérios inexplicáveis",
-      "curiosidades sobre o corpo humano",
-      "psicologia curiosa",
-      "curiosidades sobre animais bizarros",
-      "fatos sobre filmes ou séries",
-      "tecnologia surpreendente",
-      "fatos chocantes da natureza",
-      "invenções que mudaram o mundo"
+    const temasNetflix = [
+      "Round 6",
+      "Stranger Things",
+      "The Witcher",
+      "Rebelde Netflix",
+      "Dark",
+      "TUDUM 2025",
+      "Bastidores das séries da Netflix",
+      "Novidades da Netflix para 2025"
     ];
-
-    const tema = temas[Math.floor(Math.random() * temas.length)];
+    const tema = temasNetflix[Math.floor(Math.random() * temasNetflix.length)];
 
     const prompt = `
-Você é um gerador de conteúdo viral do Twitter.
+Você é um redator especializado em conteúdo viral de Twitter voltado para fãs da Netflix.
 
-Crie 3 curiosidades bizarras e surpreendentes sobre "${tema}", no estilo “Você sabia que...?”, com até 280 caracteres. Use linguagem chamativa e emojis. Cada curiosidade deve incluir 1 hashtag no final e, se possível, um link relevante fictício (ex: mais info em curiosidades.com/tema).
+Gere 3 curiosidades impactantes e viciantes sobre o tema "${tema}", estilo “Você sabia que...?”, com até 280 caracteres cada. Use emojis, linguagem de fã, e **exagere nas hashtags**. As hashtags devem incluir coisas como #Netflix #TUDUM2025 #Round6 #StrangerThings #TheWitcher #Dark etc.
 
-Depois, crie 1 thread com 4 partes sobre o mesmo tema, com tom narrativo e informativo, também com emojis e hashtags.
+Depois, gere 1 thread com 4 partes sobre o mesmo tema. Pode ser sobre segredos dos bastidores, coisas que poucos sabem, spoilers, teorias, ou o que vai rolar no TUDUM 2025.
 
-Responda somente com JSON no formato:
+Formato de saída obrigatório em JSON puro:
 [
   { "text": "..." },
   { "text": "..." },
@@ -48,7 +44,7 @@ Responda somente com JSON no formato:
   { "thread": ["Parte 1", "Parte 2", "Parte 3", "Parte 4"] }
 ]
 
-O conteúdo deve ser escrito de forma cativante, capaz de gerar muitos compartilhamentos.
+Não inclua links. Use tom empolgado, direto e estilo fandom.
 `;
 
     const res = await openai.chat.completions.create({
@@ -56,7 +52,7 @@ O conteúdo deve ser escrito de forma cativante, capaz de gerar muitos compartil
       messages: [
         {
           role: "system",
-          content: "Você é um gerador de conteúdo em JSON puro.",
+          content: "Você responde apenas com JSON válido, sem explicações.",
         },
         { role: "user", content: prompt },
       ],
