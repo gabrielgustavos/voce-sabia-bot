@@ -17,34 +17,43 @@ const twitterClient = new TwitterApi({
 
 async function runBot() {
   try {
-    const temasNetflix = [
-      "Round 6",
-      "Stranger Things",
-      "The Witcher",
-      "Rebelde Netflix",
-      "Dark",
-      "TUDUM 2025",
-      "Bastidores das séries da Netflix",
-      "Novidades da Netflix para 2025"
-    ];
+const temasNetflix = [
+  "Stranger Things: Temporada Final",
+  "Round 6: Novidades e Bastidores",
+  "One Piece: Revelações da 2ª Temporada",
+  "Wednesday: Lady Gaga e a Nova Temporada",
+  "Frankenstein de Guillermo del Toro",
+  "Wake Up Dead Man: Mistério Knives Out",
+  "Outer Banks: O que Esperar",
+  "Emily in Paris: Novidades da Próxima Temporada",
+  "TUDUM 2025: Destaques do Evento",
+  "Performances Musicais no TUDUM 2025",
+  "Presença de Celebridades no TUDUM 2025",
+  "Novas Séries e Filmes Anunciados",
+  "Bastidores das Produções da Netflix",
+  "Curiosidades sobre Séries Populares da Netflix",
+  "Anúncios Exclusivos do TUDUM 2025"
+];
+
     const tema = temasNetflix[Math.floor(Math.random() * temasNetflix.length)];
 
-    const prompt = `
-Você é um redator especializado em conteúdo viral de Twitter voltado para fãs da Netflix.
+const prompt = `
+Você é um criador de conteúdo para o X (antigo Twitter) especializado em cultura pop e séries da Netflix. Crie 3 curiosidades no estilo “Você sabia que...?” com até 280 caracteres cada, usando um tom viral, criativo, envolvente e que gere engajamento.
 
-Gere 3 curiosidades impactantes e viciantes sobre o tema "${tema}", estilo “Você sabia que...?”, com até 280 caracteres cada. Use emojis, linguagem de fã, e **exagere nas hashtags**. As hashtags devem incluir coisas como #Netflix #TUDUM2025 #Round6 #StrangerThings #TheWitcher #Dark etc.
+Depois, crie uma thread com 4 partes sobre um tema quente entre os fãs, como Stranger Things, Round 6, One Piece, Wednesday ou os destaques do TUDUM 2025 — trazendo curiosidades, teorias, bastidores, spoilers ou informações do evento.
 
-Depois, gere 1 thread com 4 partes sobre o mesmo tema. Pode ser sobre segredos dos bastidores, coisas que poucos sabem, spoilers, teorias, ou o que vai rolar no TUDUM 2025.
-
-Formato de saída obrigatório em JSON puro:
+Regras:
+- Use linguagem jovem, criativa e descontraída, como um influenciador.
+- Use emojis de forma inteligente para chamar atenção 🧠🔥👀🎬
+- Exagere nas hashtags, como se fosse uma estratégia de alcance: #Netflix #TUDUM2025 #StrangerThings #Round6 #OnePiece #Wednesday #Curiosidades #SériesNetflix #Fandom #VocêSabia #PopCulture
+- NÃO inclua links
+- Responda SOMENTE com JSON no formato:
 [
   { "text": "..." },
   { "text": "..." },
   { "text": "..." },
   { "thread": ["Parte 1", "Parte 2", "Parte 3", "Parte 4"] }
 ]
-
-Não inclua links. Use tom empolgado, direto e estilo fandom.
 `;
 
     const res = await openai.chat.completions.create({

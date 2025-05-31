@@ -1,26 +1,26 @@
-name: Run Bot
+name: Rodar bot do Twitter
 
 on:
-  workflow_dispatch: # para rodar manualmente
   schedule:
-    - cron: "*/3 * * * *" # Executa a cada 3 minutos
+    - cron: '*/3 * * * *' # a cada 3 minutos (UTC)
+  workflow_dispatch:
 
 jobs:
-  build:
+  run-bot:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-      - name: Setup Node
+      - name: Instalar Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-      - name: Install dependencies
+      - name: Instalar dependências
         run: npm install
 
-      - name: Run bot
+      - name: Rodar o bot
         run: node bot.js
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
